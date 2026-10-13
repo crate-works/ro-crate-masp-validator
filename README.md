@@ -28,6 +28,27 @@ Command line:
 npx masp-validate [--json] <target-crate.json> <profile-crate.json>
 ```
 
+Exit code is 0 if the crate passes, 2 if it has validation errors, 1 if a file can't be read.
+
+### Try it
+
+From a clone of this repo, validate the workflow example in `test-data/` against the workflow profile:
+
+```bash
+npm install
+node bin/masp-validate.js \
+  test-data/profiles/workflow/examples/minimal-example/ro-crate-metadata.json \
+  test-data/profiles/workflow/profile-crate/ro-crate-metadata.json
+```
+
+It reports one error, because the example crate has no `Profile` entity:
+
+```
+[ERROR] Expected at least 1 instances of Profile : http://schema.org/CreativeWork, http://schema.org/Profile, found 0
+```
+
+Add `--json` before the paths to see the full results, passes included.
+
 ## Tests
 
 ```bash
