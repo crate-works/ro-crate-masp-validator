@@ -1,7 +1,15 @@
 {
-  "name": "ro-crate-masp-validator",
+  "name": "@crate-works/ro-crate-masp-validator",
   "version": "0.1.0",
   "description": "Validate RO-Crates against RO-Crate MASP (Machine Actionable Schemas and Profiles) profile crates",
+  "keywords": [
+    "ro-crate",
+    "masp",
+    "validation",
+    "profile",
+    "schema",
+    "linked-data"
+  ],
   "main": "index.js",
   "bin": {
     "masp-validate": "./bin/masp-validate.js"
@@ -18,8 +26,18 @@
     "type": "git",
     "url": "git+https://github.com/crate-works/ro-crate-masp-validator.git"
   },
+  "homepage": "https://github.com/crate-works/ro-crate-masp-validator#readme",
+  "bugs": {
+    "url": "https://github.com/crate-works/ro-crate-masp-validator/issues"
+  },
   "license": "Apache-2.0",
-  "private": true,
+  "author": "ptsefton",
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "ro-crate": "^3.6.1"
   },

@@ -2,17 +2,15 @@
 
 Validates an RO-Crate against a [RO-Crate MASP](https://github.com/Language-Research-Technology/ro-crate-masp) profile or schema crate.
 
-Not on npm yet. Install from GitHub:
-
 ```bash
-npm install github:crate-works/ro-crate-masp-validator
+npm install @crate-works/ro-crate-masp-validator
 ```
 
 ## Use
 
 ```js
 const { ROCrate } = require("ro-crate");
-const { MaspValidator } = require("ro-crate-masp-validator");
+const { MaspValidator } = require("@crate-works/ro-crate-masp-validator");
 
 const profile = new ROCrate(profileJson, { array: true, link: true });
 const target = new ROCrate(targetJson, { array: true, link: true });
@@ -57,3 +55,12 @@ npm test
 ```
 
 Test fixtures in `test-data/` are copied from ro-crate-masp; see `test-data/README.md`.
+
+## Releasing
+
+Publishing to npm is done by `.github/workflows/publish.yml` when a GitHub release is published:
+
+1. Bump `version` in `package.json` (e.g. `npm version patch`) and push the commit and tag.
+2. Create a GitHub release from the tag. The workflow runs the tests and publishes to npm with provenance.
+
+The workflow uses npm trusted publishing, so no token is stored in GitHub. It has to be set up once on npmjs.com, after the package exists: package Settings → Trusted Publisher → GitHub Actions, repository `crate-works/ro-crate-masp-validator`, workflow `publish.yml`. The very first version therefore has to be published by hand by a member of the npm org (`npm publish`).
