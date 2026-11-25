@@ -1,0 +1,67 @@
+{
+  "@context": [
+    "https://w3id.org/ro/crate/1.2/context",
+    {
+      "@vocab": "http://schema.org/",
+      "ex": "https://example.org/terms#",
+      "sh": "http://www.w3.org/ns/shacl#"
+    }
+  ],
+  "@graph": [
+    {
+      "@id": "ro-crate-metadata.json",
+      "@type": "CreativeWork",
+      "about": { "@id": "./" },
+      "conformsTo": { "@id": "https://w3id.org/ro/crate/1.2" }
+    },
+    {
+      "@id": "./",
+      "@type": ["Dataset", "Profile"],
+      "name": "Literal and URL range test profile",
+      "description": "Test fixture: one class with a property ranged rdfs:Literal (as in OWL-converted schemas such as DMLex and RiC-O) and one ranged schema:URL.",
+      "datePublished": "2026-11-25",
+      "license": { "@id": "https://www.apache.org/licenses/LICENSE-2.0" },
+      "hasResource": { "@id": "#hasSpecializedSchema" }
+    },
+    {
+      "@id": "#hasSpecializedSchema",
+      "@type": "ResourceDescriptor",
+      "name": "Specialized Schema Terms",
+      "hasRole": { "@id": "http://www.w3.org/ns/dx/prof/role/schema" },
+      "hasPart": [
+        { "@id": "#class_Thing" },
+        { "@id": "#prop_Thing_label" },
+        { "@id": "#prop_Thing_homepage" }
+      ]
+    },
+    {
+      "@id": "#class_Thing",
+      "@type": "rdfs:Class",
+      "rdfs:label": "ex:Thing",
+      "name": "Thing",
+      "prov:specializationOf": { "@id": "https://example.org/terms#Thing" },
+      "sh:minCount": 1
+    },
+    {
+      "@id": "#prop_Thing_label",
+      "@type": "rdf:Property",
+      "rdfs:label": "ex:label",
+      "name": "Label",
+      "prov:specializationOf": { "@id": "https://example.org/terms#label" },
+      "domainIncludes": { "@id": "#class_Thing" },
+      "rangeIncludes": { "@id": "http://www.w3.org/2000/01/rdf-schema#Literal" },
+      "sh:minCount": 1,
+      "sh:maxCount": 1
+    },
+    {
+      "@id": "#prop_Thing_homepage",
+      "@type": "rdf:Property",
+      "rdfs:label": "ex:homepage",
+      "name": "Homepage",
+      "prov:specializationOf": { "@id": "https://example.org/terms#homepage" },
+      "domainIncludes": { "@id": "#class_Thing" },
+      "rangeIncludes": { "@id": "schema:URL" },
+      "sh:maxCount": 1
+    }
+  ]
+}
