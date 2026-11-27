@@ -10,7 +10,7 @@ const { ROCrate } = require('ro-crate');
 const { MaspValidator } = require('../lib/masp-validator');
 
 function printUsageAndExit() {
-  console.log('Usage: masp-validate <target-crate.json> <profile-crate.json>');
+  console.error('Usage: masp-validate [--json] <target-crate.json> <profile-crate.json>');
   process.exit(1);
 }
 
@@ -38,9 +38,11 @@ async function main() {
       console.log(JSON.stringify(results, null, 2));
     }
     if (errors.length > 0) {
+      // With --json, stdout holds only the results; the summary goes to stderr
+      const report = printJson ? console.error : console.log;
       errors.forEach(e => {
         const level = e.level || e.severity || 'error';
-        console.log(`[${level.toUpperCase()}] ${e.message}`);
+        report(`[${level.toUpperCase()}] ${e.message}`);
       });
       process.exit(2);
     } else {
@@ -50,6 +52,7 @@ async function main() {
       process.exit(0);
     }
   } catch (err) {
+    // Unreadable input: no results, so nothing on stdout even with --json
     console.error('Validation failed:', err.message);
     process.exit(1);
   }
